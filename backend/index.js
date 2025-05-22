@@ -3,14 +3,14 @@ import dotenv from "dotenv"
 import { connectDB } from "./DB/connectDB.js";
 import authRoutes from "./routes/auth.route.js"
 const app = express();
+const PORT = process.env.PORT || 5000
+app.use(express.json())
 dotenv.config()
-app.get("/",(req,res)=>{
-res.send("hello world")
-})
+
 app.use("/api/auth",authRoutes)
-app.listen(3000, () => {
+app.listen(PORT, () => {
   connectDB()
-  console.log("server is runing on port 3000");
+  console.log("server is runing on port: ", PORT);
 });
 
 // mern stack
