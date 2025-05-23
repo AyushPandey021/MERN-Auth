@@ -1,14 +1,24 @@
 import express from "express";
-import { login, logout, signup } from "../controller/auth.controller.js";
-import { sendVerificationEmail } from "../mailtrap/emails.js";
+import {
+  forgotPassword,
+  login,
+  logout,
+  signup,
+  verifyEmail,
+  resetPassword,
+  checkAuth
+} from "../controller/auth.controller.js";
+import { verifyToken } from "../middleware/verifyToken.js";
+
 const router = express.Router();
+router.get("/check-auth",verifyToken,checkAuth)
 router.post("/signup", signup);
 router.post("/login ", login);
 router.post("/logout ", logout);
 
-router.post("/verify-email",sendVerificationEmail)
+router.post("/verify-email", verifyEmail);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 export default router;
 
-
-
-// time 1.23 min 
+// time 1.23 min
